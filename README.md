@@ -1,4 +1,5 @@
 # vue-test
+<<<<<<< HEAD
 
 ## Project setup
 ```
@@ -22,3 +23,5 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+=======
+>>>>>>> 4b61b6fa33f56939089bdb9c6bfc1307c6c892a9
