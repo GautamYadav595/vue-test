@@ -1,18 +1,20 @@
 <template>
   <div>
-  <testComponet />
+   <testComponet /> 
+  <todoList />
 </div>
 </template>
 
 <script>
 
-import testComponet from './components/testComponet.vue'
-
+ import testComponet from './components/testComponet.vue'
+import todoList from './components/todo-list.vue';
 export default {
   name: 'App',
   components: {
    
-    testComponet
+     testComponet,
+    todoList
   }
 }
 </script>
