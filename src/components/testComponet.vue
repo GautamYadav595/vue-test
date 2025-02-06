@@ -1,52 +1,62 @@
 <template>
     <div>
-    <h1 id="hello"> {{hello}} {{ testing }}</h1>
-    <br />
-    <br />
-    {{ date }}
-    <br />
-    <input  v-model="hello"  >
-    <button v-on:click="clear()">Click to clear input field</button>
-    <button v-on:click="makeCapital()">Click to convert in UpperCase</button>
-</div>
+        <h1 id="hello"> {{ hello }} {{ testing }}</h1>
+        <br />
+        <br />
+        {{ date }}
+        <br />
+        <input v-model="hello">
+        <button v-on:click="clear">Click to clear input field</button>
+        <button v-on:click="makeCapital">Click to convert in UpperCase</button>
+        <p> Has published Books {{ publishedBooksMessage }}</p> 
+    </div>
 </template>
 
 <script>
-export default{
+export default {
     name: "testComponent",
-    data: function () {
+    data() {
         return {
-            hello : "",
-            testing:"testing",
-            date: false
+            hello: "",
+            testing: "testing",
+            date: false,
+            author: {
+                name: 'John Doe',
+                books: [
+                    'Vue 2 - Let\'s Grid',
+                    'Vue 3 - Let\'s Grid',
+                    'Vue 4 - Let\'s Grid',
+                ]
             }
+        };
     },
-    created : function(){
-        console.log("Created is Running")
+    computed: {
+        publishedBooksMessage() {
+            return this.author.books.length > 0 ? 'Yes' : 'No';
+        }
+    },
+    created() {
+        console.log("Created is Running");
         this.date = new Date();
     },
-    mounted : function(){
-        console.log("Mounted is Running")
+    mounted() {
+        console.log("Mounted is Running");
         this.date = new Date();
     },
-    updated : function(){
-        console.log("Updated is Running")
+    updated() {
+        console.log("Updated is Running");
     },
-    detsroyed : function(){
-        console.log("Destroyed is Running")
-        this.date = new Date();
-    },
+    
     methods: {
-        clear: function(){
-            this.hello = ""
+        clear() {
+            this.hello = "";
         },
-         makeCapital: function(){
+        makeCapital() {
             this.hello = this.hello.toUpperCase();
-         }
+        }
     }
-}
+};
 </script>
 
 <style scoped>
-
 </style>
