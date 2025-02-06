@@ -1,7 +1,8 @@
 <template>
     <div id="todo-list-example">
         <form v-on:submit.prevent="addNewTodo">
-            <label for="new-todo">Add a Todo</label>
+            <label for="new-todo">Add a new Todo</label>
+            <br />
             <input
             v-model="newTodoText"
             id="new-todo"
@@ -10,61 +11,57 @@
             <button>Add</button>
         </form>
         <ul>
-            <li is ="todo-item" 
+            <TodoItem   
                 v-for="(todo, index) in todos"
-                v-bind:key="todo.id"
-                v-bind:title="todo.title"
-                v-on:remove="todos.splice(index,1)"
-                >
-
-            </li>
-
-        </ul>
-
+                :key="todo.id"
+                :todo="todo"
+                v-on:remove="removeTodo(index)"
+                v-on:edit="editTodo(index, $event)"
+                ></TodoItem>
+           </ul>
     </div>
 </template>
 
 <script>
+import TodoItem from "./TodoItem.vue"
 export default{
-    name: "#todo-list",
+    name: "TodoList",
+    components: { TodoItem },
     data() {
         return {
      newTodoText: "",
      todos :
 [
-    {
-        id:1,
-        title: 'Take a Shower'
-    },
-    {
-        id: 2,
-        title: "prepare to cook Food"
-    },
-    {
-        id: 3,
-        title: "Coock food"
-    },
-    {
-        id: 4,
-        title: "Eat food"
-    },
-    {
-        id: 5,
-        title: "Sleep"
-    }
-] ,
+    { id: 1, title: "Take a Shower" },
+    { id: 2, title: "prepare to cook Food" },
+    { id: 3, title: "Coock food" },
+    { id: 4, title: "Eat food"},
+    { id: 5, title: "Sleep"}
+],
 nextTodoId :  6, 
         }
  },
  methods:{
     addNewTodo : function(){
-        this.toodos.push({
+        if(this.newTodoText.trim() !== ""){
+        this.todos.push({
             id:this.nextTodoId++,
-            title: this.newTodoText
-        })
-        this.newTodoText = ""
+            title: this.newTodoText,
+            isEditing: false,
+        });
+        this.newTodoText = "";
     }
- }
+    },
+ 
+    removeTodo : function(index){
+    this.todos.splice(index,1);
+ },
+ editTodo : function(index, newTitle){
 
+   this.todos[index].title = newTitle;
+   this.todos[index].isEditing = false;
+ }
 }
+}
+
 </script>
